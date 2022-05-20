@@ -1,82 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class GeneralForm extends Component {
-  constructor(props) {
-    super(props);
+const GeneralForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [infoSent, setInfoSent] = useState(false);
 
-    this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      infoSent: false,
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    const value = e.target.value;
-    this.setState({
-      [e.target.id]: value,
-    });
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      infoSent: !this.state.infoSent,
-    });
-  }
+    setInfoSent(!infoSent);
+  };
 
-  render() {
-    const infoSent = this.state.infoSent;
-    return (
-      <div className="box">
-        <h2>General Information</h2>
-        <form action="submit" onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="name">Name: </label>
-            {!infoSent && (
-              <input
-                type="text"
-                id="name"
-                onChange={this.handleChange}
-                value={this.state.name}
-              />
-            )}
-            {infoSent && <span>{this.state.name}</span>}
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            {!infoSent && (
-              <input
-                type="email"
-                id="email"
-                onChange={this.handleChange}
-                value={this.state.email}
-              />
-            )}
-            {infoSent && <span>{this.state.email}</span>}
-          </div>
-          <div>
-            <label htmlFor="phone">Phone Number:</label>
-            {!infoSent && (
-              <input
-                type="tel"
-                id="phone"
-                onChange={this.handleChange}
-                value={this.state.phone}
-              />
-            )}
-            {infoSent && <span>{this.state.phone}</span>}
-          </div>
-          {!infoSent && <button>Enter info</button>}
-          {infoSent && <button>Edit info</button>}
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="box">
+      <h2>General Information</h2>
+      <form action="submit" onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name: </label>
+          {!infoSent && (
+            <input
+              type="text"
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+          )}
+          {infoSent && <span>{name}</span>}
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          {!infoSent && (
+            <input
+              type="email"
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          )}
+          {infoSent && <span>{email}</span>}
+        </div>
+        <div>
+          <label htmlFor="phone">Phone Number:</label>
+          {!infoSent && (
+            <input
+              type="tel"
+              id="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+            />
+          )}
+          {infoSent && <span>{phone}</span>}
+        </div>
+        {!infoSent && <button>Enter info</button>}
+        {infoSent && <button>Edit info</button>}
+      </form>
+    </div>
+  );
+};
 
 export default GeneralForm;

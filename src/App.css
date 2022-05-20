@@ -65,6 +65,7 @@ h2 {
 textarea {
   resize: none;
   font-size: 1.2em;
+  max-width: 250px;
 }
 
 input {
@@ -74,6 +75,9 @@ input {
 
 .taskSpan {
   margin: 15px 10px;
+  border: 1px solid gray;
+  padding: 10px 50px;
+  word-break: break-all;
 }
 
 @media only screen and (max-width: 950px) {
